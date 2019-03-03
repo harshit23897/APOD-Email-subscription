@@ -1,0 +1,22 @@
+{
+  "name": "apod-email-subscription",
+  "version": "1.0.0",
+  "description": "This application let's users send NASA's Astronomy Image of the Day to their email everyday.",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "npm install --prefix frontend",
+    "start": "nodemon index.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
+  },
+  "author": "Harshit Jain",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
