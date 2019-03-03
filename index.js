@@ -13,7 +13,7 @@ mongoose
   .catch(err => console.log(err));
 
 // Home page.
-app.use("/", landing);
+app.use("/api/", landing);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

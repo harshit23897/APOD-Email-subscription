@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
       response => {
         response.on("data", d => {
           dict = JSON.parse(d.toString("utf8"));
-          res.status(200).json(dict.hdurl);
+          return res.status(200).json(dict);
         });
       }
     )
