@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../static/landing.css";
 
 export default class Landing extends Component {
   state = {
@@ -21,10 +22,16 @@ export default class Landing extends Component {
   };
 
   render() {
-    console.log(this.state.dict);
+    console.log(window.innerWidth);
+    console.log(window.innerHeight);
     return (
       <div>
-        <img src={this.state.dict.hdurl} alt="Italian Trulli" />
+        <img
+          src={this.state.dict.hdurl}
+          alt="Italian Trulli"
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
       </div>
     );
   }
