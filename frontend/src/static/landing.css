@@ -1,0 +1,48 @@
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.email-form {
+  color: #fefefe;
+  width: 500px;
+  border-radius: 0;
+  margin-bottom: 0;
+  border-radius: 0 0 0 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.email {
+  padding-left: 2%;
+  font-size: 16px;
+  width: 300px;
+  height: 30px;
+  font-family: Karla, sans-serif;
+  text-align: left;
+  clear: both;
+  float: left;
+}
+
+.submit {
+  margin-left: -17%;
+  border: none;
+  width: 100px;
+  height: 36px;
+  cursor: pointer;
+  background: #316de0;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}

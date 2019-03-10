@@ -25,13 +25,29 @@ export default class Landing extends Component {
     console.log(window.innerWidth);
     console.log(window.innerHeight);
     return (
-      <div>
+      <div className="container">
         <img
-          src={this.state.dict.hdurl}
+          src={this.state.dict.url}
           alt="Italian Trulli"
           width={window.innerWidth}
           height={window.innerHeight}
         />
+        <div className="email-form">
+          <form className="newsletter-subscription">
+            <input
+              className="email"
+              type="email"
+              placeholder="Email"
+              required
+            />
+            <input
+              className="button"
+              value="subscribe"
+              className="submit"
+              type="submit"
+            />
+          </form>
+        </div>
       </div>
     );
   }
