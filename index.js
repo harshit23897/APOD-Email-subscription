@@ -1,3 +1,4 @@
+const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -11,6 +12,8 @@ mongoose
   .connect(db.mongoURI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
+
+app.use(bodyParser.json());
 
 // Home page.
 app.use("/api/", landing);

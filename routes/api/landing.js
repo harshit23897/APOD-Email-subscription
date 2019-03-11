@@ -4,15 +4,6 @@ const https = require("https");
 
 const keys = require("../../config/keys");
 
-var options = {
-  hostname: "api.nasa.gov",
-  path: "/planetary/apod",
-  method: "GET",
-  headers: {
-    Accept: "application/json"
-  }
-};
-
 router.get("/", (req, res) => {
   var dict;
   https
@@ -30,6 +21,10 @@ router.get("/", (req, res) => {
     .on("error", err => {
       console.log(err);
     });
+});
+
+router.post("/save", (req, res) => {
+  console.log(req.body);
 });
 
 module.exports = router;

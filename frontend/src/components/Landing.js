@@ -2,6 +2,29 @@ import React, { Component } from "react";
 import "../static/landing.css";
 
 export default class Landing extends Component {
+  constructor(props) {
+    super(props);
+    this.saveEmail = this.saveEmail.bind(this);
+  }
+
+  saveEmail = async e => {
+    var email = document.getElementById("email").value;
+
+    const rawResponse = await fetch("/api/save", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: email })
+    });
+    const content = await rawResponse.json();
+
+    console.log(content);
+
+    e.preventDefault();
+  };
+
   state = {
     dict: []
   };
@@ -22,12 +45,10 @@ export default class Landing extends Component {
   };
 
   render() {
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
     return (
       <div className="container">
         <img
-          src={this.state.dict.hdurl}
+          src={this.state.dict.url}
           alt="Italian Trulli"
           width={window.innerWidth}
           height={window.innerHeight}
@@ -37,19 +58,15 @@ export default class Landing extends Component {
             Do you want NASA's Astronomy Picture of the Day in you Email
             everyday?
           </h3>
-          <form className="newsletter-subscription">
+          <form className="newsletter-subscription" onSubmit={this.saveEmail}>
             <input
               className="email"
               type="email"
+              id="email"
               placeholder="Email"
               required
             />
-            <input
-              className="button"
-              value="subscribe"
-              className="submit"
-              type="submit"
-            />
+            <input className="button submit" value="subscribe" type="submit" />
           </form>
         </div>
       </div>
