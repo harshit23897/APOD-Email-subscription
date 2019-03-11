@@ -27,12 +27,16 @@ export default class Landing extends Component {
     return (
       <div className="container">
         <img
-          src={this.state.dict.url}
+          src={this.state.dict.hdurl}
           alt="Italian Trulli"
           width={window.innerWidth}
           height={window.innerHeight}
         />
         <div className="email-form">
+          <h3>
+            Do you want NASA's Astronomy Picture of the Day in you Email
+            everyday?
+          </h3>
           <form className="newsletter-subscription">
             <input
               className="email"
