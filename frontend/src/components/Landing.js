@@ -8,6 +8,8 @@ export default class Landing extends Component {
   }
 
   saveEmail = async e => {
+    // Prevent form from reloading.
+    e.preventDefault();
     var email = document.getElementById("email").value;
 
     const rawResponse = await fetch("/api/save", {
@@ -22,7 +24,7 @@ export default class Landing extends Component {
 
     console.log(content);
 
-    e.preventDefault();
+    document.getElementById("form").innerHTML = content;
   };
 
   state = {
@@ -58,16 +60,22 @@ export default class Landing extends Component {
             Do you want NASA's Astronomy Picture of the Day in you Email
             everyday?
           </h3>
-          <form className="newsletter-subscription" onSubmit={this.saveEmail}>
-            <input
-              className="email"
-              type="email"
-              id="email"
-              placeholder="Email"
-              required
-            />
-            <input className="button submit" value="subscribe" type="submit" />
-          </form>
+          <div id="form">
+            <form className="newsletter-subscription" onSubmit={this.saveEmail}>
+              <input
+                className="email"
+                type="email"
+                id="email"
+                placeholder="Email"
+                required
+              />
+              <input
+                className="button submit"
+                value="subscribe"
+                type="submit"
+              />
+            </form>
+          </div>
         </div>
       </div>
     );

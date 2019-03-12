@@ -35,7 +35,7 @@ router.post("/save", (req, res) => {
         email: req.body.email
       })
         .save()
-        .then(email => console.log(email))
+        .then(() => res.status(200).json("Successfully Added"))
         .catch(err => console.log(err));
     }
   });
