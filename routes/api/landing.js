@@ -4,6 +4,8 @@ const https = require("https");
 
 const keys = require("../../config/keys");
 
+const Email = require("../../models/Email");
+
 router.get("/", (req, res) => {
   var dict;
   https
@@ -24,7 +26,19 @@ router.get("/", (req, res) => {
 });
 
 router.post("/save", (req, res) => {
-  console.log(req.body);
+  Email.findOne({ email: req.body.email }).then(email => {
+    if (email) {
+      const errors = "Email already exists.";
+      return res.status(200).json(errors);
+    } else {
+      Email({
+        email: req.body.email
+      })
+        .save()
+        .then(email => console.log(email))
+        .catch(err => console.log(err));
+    }
+  });
 });
 
 module.exports = router;
