@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const express = require("express");
 const router = express.Router();
 const https = require("https");
@@ -43,6 +44,21 @@ router.post("/save", (req, res) => {
         .catch(err => console.log(err));
     }
   });
+});
+
+router.post("/unsubscribe/:email/:hash", (req, res) => {
+  var shasum = crypto.createHash("sha1");
+  var emailHash = shasum.update(req.params.email).digest("hex");
+
+  if (emailHash === req.params.hash) {
+    Email.findOneAndRemove({ email: req.params.email }).then(response => {
+      if (response !== null) {
+        res.status(200).json("Successfully Unsubscribed.");
+      } else {
+        res.status(200).json("Email Not Found.");
+      }
+    });
+  }
 });
 
 var rule = new schedule.RecurrenceRule();
