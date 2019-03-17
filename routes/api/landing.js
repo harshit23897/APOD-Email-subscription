@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const https = require("https");
+const fetch = require("node-fetch");
+const nodemailer = require("nodemailer");
+const schedule = require("node-schedule");
 
 const keys = require("../../config/keys");
 
 const Email = require("../../models/Email");
 
 router.get("/", (req, res) => {
+  // Email.collection.remove({});
   var dict;
   https
     .get(
@@ -39,6 +43,80 @@ router.post("/save", (req, res) => {
         .catch(err => console.log(err));
     }
   });
+});
+
+var rule = new schedule.RecurrenceRule();
+rule.hour = 10;
+rule.minute = 0;
+rule.second = 0;
+
+callAPI = async () => {
+  const res = await fetch("http://localhost:8000/api/");
+  const body = await res.json();
+
+  if (res.status !== 200) throw Error(body.message);
+
+  return body;
+};
+
+var j = schedule.scheduleJob(rule, async function() {
+  callAPI()
+    .then(res => {
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: "harshitpanks@gmail.com", // generated ethereal user
+          pass: "challenginglife" // generated ethereal password
+        }
+      });
+
+      var mails = [];
+      var currentDate = new Date()
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("-");
+
+      Email.find()
+        .then(async emails => {
+          for (var index in emails) {
+            mails.push(emails[index].email);
+          }
+
+          for (mail in mails) {
+            // setup email data with unicode symbols
+            let mailOptions = {
+              from: '"Harshit Jain" <harshitpanks@gmail.com>', // sender address
+              to: mails[mail], // list of receivers
+              subject:
+                "[" +
+                currentDate +
+                "] NASA Astronomy Picture Of the Day (APoD)", // Subject line
+              html:
+                "<p>Hi, </p>" +
+                "<p>The NASA APoD is attached below.</p>" +
+                "<p><b>Explanation: </b>" +
+                res.explanation +
+                "</p>" +
+                "<p>Cheers,</p><p>Harshit Jain.</p>",
+              attachments: [
+                {
+                  filename: currentDate + "_NASA_APoD.jpeg",
+                  path: res.hdurl
+                }
+              ]
+            };
+
+            await transporter.sendMail(mailOptions);
+          }
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 });
 
 module.exports = router;

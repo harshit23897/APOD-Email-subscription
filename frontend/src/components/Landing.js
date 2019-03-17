@@ -22,8 +22,6 @@ export default class Landing extends Component {
     });
     const content = await rawResponse.json();
 
-    console.log(content);
-
     document.getElementById("form").innerHTML = content;
   };
 
@@ -50,15 +48,15 @@ export default class Landing extends Component {
     return (
       <div className="container">
         <img
-          src={this.state.dict.hdurl}
+          src={this.state.dict.url}
           alt="Italian Trulli"
           width={window.innerWidth}
           height={window.innerHeight}
         />
         <div className="email-form">
           <h3>
-            Do you want NASA's Astronomy Picture of the Day in you Email
-            everyday?
+            Subscribe if you want NASA's Astronomy Picture of the Day in you
+            Email everyday?
           </h3>
           <div id="form">
             <form className="newsletter-subscription" onSubmit={this.saveEmail}>
