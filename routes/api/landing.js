@@ -46,7 +46,7 @@ router.post("/save", (req, res) => {
   });
 });
 
-router.post("/unsubscribe/:email/:hash", (req, res) => {
+router.get("/unsubscribe/:email/:hash", (req, res) => {
   var shasum = crypto.createHash("sha1");
   var emailHash = shasum.update(req.params.email).digest("hex");
 
@@ -62,9 +62,9 @@ router.post("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 10;
-rule.minute = 0;
-rule.second = 0;
+rule.hour = 20;
+rule.minute = 7;
+rule.second = 10;
 
 callAPI = async () => {
   const res = await fetch("http://localhost:8000/api/");
@@ -103,7 +103,10 @@ var j = schedule.scheduleJob(rule, async function() {
             mails.push(emails[index].email);
           }
 
+          var shasum = crypto.createHash("sha1");
+
           for (mail in mails) {
+            var emailHash = shasum.update(mails[mail]).digest("hex");
             // setup email data with unicode symbols
             let mailOptions = {
               from: '"Harshit Jain" <harshitpanks@gmail.com>', // sender address
@@ -118,11 +121,15 @@ var j = schedule.scheduleJob(rule, async function() {
                 "<p><b>Explanation: </b>" +
                 res.explanation +
                 "</p>" +
-                "<p>Cheers,</p><p>Harshit Jain.</p>",
+                "<p>Cheers,</p><p>Harshit Jain.</p><p></p><p><small><a href=localhost:8000/api/unsubscribe/" +
+                mails[mail] +
+                "/" +
+                emailHash +
+                ">Unsubscribe</a></small></p>",
               attachments: [
                 {
                   filename: currentDate + "_NASA_APoD.jpeg",
-                  path: res.hdurl
+                  path: res.url
                 }
               ]
             };
