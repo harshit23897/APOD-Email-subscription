@@ -64,9 +64,9 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 21;
-rule.minute = 7;
-rule.second = 30;
+rule.hour = 22;
+rule.minute = 34;
+rule.second = 50;
 
 callAPI = async () => {
   const res = await fetch("http://localhost:8000/api/");
@@ -123,11 +123,12 @@ var j = schedule.scheduleJob(rule, async function() {
                 "<p><b>Explanation: </b>" +
                 res.explanation +
                 "</p>" +
-                "<p>Cheers,</p><p>Harshit Jain.</p><p></p><p><small><a href=localhost:3000/unsubscribe/" +
+                '<p>Cheers,</p><p>Harshit Jain.</p><br><a href="http://localhost:3000/unsubscribe/' +
                 mails[mail] +
                 "/" +
                 emailHash +
-                ">Unsubscribe</a></small></p>",
+                '"' +
+                ">unsubscribe</a>",
               attachments: [
                 {
                   filename: currentDate + "_NASA_APoD.jpeg",
