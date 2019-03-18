@@ -53,7 +53,7 @@ export default class Landing extends Component {
           width={window.innerWidth}
           height={window.innerHeight}
         />
-        <div className="email-form">
+        <div className="content">
           <h3>
             Subscribe if you want NASA's Astronomy Picture of the Day in you
             Email everyday?

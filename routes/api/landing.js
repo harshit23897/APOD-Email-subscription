@@ -58,13 +58,15 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
         res.status(200).json("Email Not Found.");
       }
     });
+  } else {
+    res.status(200).json("Incorrect email or Hash.");
   }
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 20;
+rule.hour = 21;
 rule.minute = 7;
-rule.second = 10;
+rule.second = 30;
 
 callAPI = async () => {
   const res = await fetch("http://localhost:8000/api/");
@@ -121,7 +123,7 @@ var j = schedule.scheduleJob(rule, async function() {
                 "<p><b>Explanation: </b>" +
                 res.explanation +
                 "</p>" +
-                "<p>Cheers,</p><p>Harshit Jain.</p><p></p><p><small><a href=localhost:8000/api/unsubscribe/" +
+                "<p>Cheers,</p><p>Harshit Jain.</p><p></p><p><small><a href=localhost:3000/unsubscribe/" +
                 mails[mail] +
                 "/" +
                 emailHash +
