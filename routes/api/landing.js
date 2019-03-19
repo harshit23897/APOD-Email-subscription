@@ -64,9 +64,9 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 22;
-rule.minute = 34;
-rule.second = 50;
+rule.hour = 19;
+rule.minute = 56;
+rule.second = 0;
 
 callAPI = async () => {
   const res = await fetch("http://localhost:8000/api/");
@@ -86,8 +86,8 @@ var j = schedule.scheduleJob(rule, async function() {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-          user: "harshitpanks@gmail.com", // generated ethereal user
-          pass: "challenginglife" // generated ethereal password
+          user: process.env.EMAIL_USERNAME, // generated ethereal user
+          pass: process.env.EMAIL_PASSWORD // generated ethereal password
         }
       });
 
@@ -105,13 +105,12 @@ var j = schedule.scheduleJob(rule, async function() {
             mails.push(emails[index].email);
           }
 
-          var shasum = crypto.createHash("sha1");
-
           for (mail in mails) {
+            var shasum = crypto.createHash("sha1");
             var emailHash = shasum.update(mails[mail]).digest("hex");
             // setup email data with unicode symbols
             let mailOptions = {
-              from: '"Harshit Jain" <harshitpanks@gmail.com>', // sender address
+              from: '"Harshit Jain" <nasaapodsubscription@gmail.com>', // sender address
               to: mails[mail], // list of receivers
               subject:
                 "[" +
