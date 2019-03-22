@@ -19,5 +19,5 @@ app.use(bodyParser.json());
 // Home page.
 app.use("/api/", landing);
 
-const port = process.env.PORT || 8000;
+const port = 8000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
