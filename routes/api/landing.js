@@ -16,7 +16,6 @@ router.get("/", (req, res) => {
   // Email.collection.remove({});
   var dict;
   host = req.protocol + "://" + req.get("host");
-  console.log(req.protocol + "://" + req.get("host"));
   https
     .get(
       "https://api.nasa.gov/planetary/apod?api_key=" +
@@ -70,8 +69,8 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 17;
-rule.minute = 15;
+rule.hour = 10;
+rule.minute = 0;
 rule.second = 0;
 
 callAPI = async () => {
@@ -86,7 +85,6 @@ callAPI = async () => {
 var j = schedule.scheduleJob(rule, async function() {
   callAPI()
     .then(res => {
-      console.log("Inside");
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
