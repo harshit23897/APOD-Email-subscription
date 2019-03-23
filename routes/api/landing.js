@@ -13,6 +13,7 @@ const Email = require("../../models/Email");
 router.get("/", (req, res) => {
   // Email.collection.remove({});
   var dict;
+  console.log(req.protocol + "://" + req.get("host"));
   https
     .get(
       "https://api.nasa.gov/planetary/apod?api_key=" +
@@ -67,7 +68,7 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 
 var rule = new schedule.RecurrenceRule();
 rule.hour = 15;
-rule.minute = 25;
+rule.minute = 33;
 rule.second = 30;
 
 callAPI = async () => {
