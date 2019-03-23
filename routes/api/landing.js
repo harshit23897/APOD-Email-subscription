@@ -8,7 +8,7 @@ const schedule = require("node-schedule");
 
 const keys = require("../../config/keys");
 
-const host = "";
+var host = "";
 
 const Email = require("../../models/Email");
 
