@@ -8,11 +8,14 @@ const schedule = require("node-schedule");
 
 const keys = require("../../config/keys");
 
+const host = "";
+
 const Email = require("../../models/Email");
 
 router.get("/", (req, res) => {
   // Email.collection.remove({});
   var dict;
+  host = req.protocol + "://" + req.get("host");
   console.log(req.protocol + "://" + req.get("host"));
   https
     .get(
@@ -72,7 +75,7 @@ rule.minute = 33;
 rule.second = 30;
 
 callAPI = async () => {
-  const res = await fetch("http://localhost:8000/api/");
+  const res = await fetch(host + "/api/");
   const body = await res.json();
 
   if (res.status !== 200) throw Error(body.message);
