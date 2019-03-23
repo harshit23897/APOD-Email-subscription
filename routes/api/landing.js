@@ -67,7 +67,7 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 
 var rule = new schedule.RecurrenceRule();
 rule.hour = 15;
-rule.minute = 15;
+rule.minute = 25;
 rule.second = 30;
 
 callAPI = async () => {
