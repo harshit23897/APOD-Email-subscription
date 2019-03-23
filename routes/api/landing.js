@@ -70,8 +70,8 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 16;
-rule.minute = 58;
+rule.hour = 17;
+rule.minute = 4;
 rule.second = 0;
 
 callAPI = async () => {
@@ -135,7 +135,6 @@ var j = schedule.scheduleJob(rule, async function() {
                 mails[mail] +
                 "/" +
                 emailHash +
-                '"' +
                 ">unsubscribe</a>",
               attachments: [
                 {
