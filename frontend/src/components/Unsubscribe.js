@@ -13,7 +13,7 @@ export default class Unsubscribe extends Component {
       .catch(err => console.log(err));
 
     this.callImageAPI()
-      .then(res => this.setState({ dict: res }))
+      .then(res => this.setState({ dict: res[0] }))
       .catch(err => console.log(err));
   }
 
