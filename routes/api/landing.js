@@ -21,7 +21,9 @@ router.get("/", (req, res) => {
       response => {
         response.on("data", d => {
           dict = JSON.parse(d.toString("utf8"));
-          return res.status(200).json(dict);
+          return res
+            .status(200)
+            .json([dict, req.protocol + "://" + req.get("host")]);
         });
       }
     )
@@ -64,9 +66,9 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 14;
-rule.minute = 50;
-rule.second = 0;
+rule.hour = 15;
+rule.minute = 15;
+rule.second = 30;
 
 callAPI = async () => {
   const res = await fetch("http://localhost:8000/api/");
@@ -120,9 +122,11 @@ var j = schedule.scheduleJob(rule, async function() {
                 "<p>Hi, </p>" +
                 "<p>The NASA APoD is attached below.</p>" +
                 "<p><b>Explanation: </b>" +
-                res.explanation +
+                res[0].explanation +
                 "</p>" +
-                '<p>Cheers,</p><p>Harshit Jain.</p><br><a href="http://localhost:3000/unsubscribe/' +
+                "<p>Cheers,</p><p>Harshit Jain.</p><br><a href=" +
+                res[1] +
+                "/unsubscribe/" +
                 mails[mail] +
                 "/" +
                 emailHash +
@@ -131,7 +135,7 @@ var j = schedule.scheduleJob(rule, async function() {
               attachments: [
                 {
                   filename: currentDate + "_NASA_APoD.jpeg",
-                  path: res.url
+                  path: res[0].url
                 }
               ]
             };

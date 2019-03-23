@@ -31,7 +31,7 @@ export default class Landing extends Component {
 
   componentDidMount() {
     this.callAPI()
-      .then(res => this.setState({ dict: res }))
+      .then(res => this.setState({ dict: res[0] }))
       .catch(err => console.log(err));
   }
 
