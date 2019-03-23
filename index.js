@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const path = require("path");
 require("dotenv").config();
 
 const db = require("./config/keys");
