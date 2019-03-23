@@ -71,8 +71,8 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 
 var rule = new schedule.RecurrenceRule();
 rule.hour = 16;
-rule.minute = 45;
-rule.second = 30;
+rule.minute = 50;
+rule.second = 0;
 
 callAPI = async () => {
   const res = await fetch(host + "/api/");
@@ -86,6 +86,7 @@ callAPI = async () => {
 var j = schedule.scheduleJob(rule, async function() {
   callAPI()
     .then(res => {
+      console.log("Inside");
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
