@@ -14,6 +14,7 @@ const Email = require("../../models/Email");
 
 router.get("/", (req, res) => {
   // Email.collection.remove({});
+  // Email.find({}).then(res => console.log(res));
   var dict;
   host = req.protocol + "://" + req.get("host");
   https
@@ -149,5 +150,9 @@ var j = schedule.scheduleJob(rule, async function() {
     })
     .catch(err => console.log(err));
 });
+
+setInterval(function() {
+  https.get("https://radiant-springs-17295.herokuapp.com");
+}, 1800000); // every 30 minutes (30*60*1000)
 
 module.exports = router;
