@@ -14,7 +14,7 @@ const Email = require("../../models/Email");
 
 router.get("/", (req, res) => {
   // Email.collection.remove({});
-  Email.find({}).then(res => console.log(res));
+  // Email.find({}).then(res => console.log(res));
   var dict;
   host = req.protocol + "://" + req.get("host");
   https
