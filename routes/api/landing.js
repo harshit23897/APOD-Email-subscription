@@ -152,7 +152,7 @@ var j = schedule.scheduleJob(rule, async function() {
 });
 
 setInterval(function() {
-  https.get("https://radiant-springs-17295.herokuapp.com");
+  https.get("https://apodemailsubscription.herokuapp.com");
 }, 1800000); // every 30 minutes (30*60*1000)
 
 module.exports = router;
