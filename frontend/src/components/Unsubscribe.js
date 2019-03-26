@@ -41,7 +41,7 @@ export default class Unsubscribe extends Component {
     return (
       <div className="container">
         <img
-          src={this.state.dict.hdurl}
+          src={this.state.dict.url}
           alt="Italian Trulli"
           width={window.innerWidth}
           height={window.innerHeight}
