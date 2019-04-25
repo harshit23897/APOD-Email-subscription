@@ -70,7 +70,7 @@ router.get("/unsubscribe/:email/:hash", (req, res) => {
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = 10;
+rule.hour = 12;
 rule.minute = 0;
 rule.second = 0;
 
@@ -153,6 +153,6 @@ var j = schedule.scheduleJob(rule, async function() {
 
 setInterval(function() {
   https.get("https://apodemailsubscription.herokuapp.com");
-}, 1800000); // every 30 minutes (30*60*1000)
+}, 3300000); // every 55 minutes (55*60*1000)
 
 module.exports = router;
