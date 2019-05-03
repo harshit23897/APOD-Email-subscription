@@ -153,6 +153,6 @@ var j = schedule.scheduleJob(rule, async function() {
 
 setInterval(function() {
   https.get("https://apodemailsubscription.herokuapp.com");
-}, 3300000); // every 55 minutes (55*60*1000)
+}, 300000); // every 5 minutes (5*60*1000)
 
 module.exports = router;
